@@ -13,7 +13,7 @@
 
 ## 開発環境
 
-Node.js 20以上、npmを用意してから実行してください。
+Node.js 22.6以上、npmを用意してから実行してください。
 
     npm install
     npm run dev
