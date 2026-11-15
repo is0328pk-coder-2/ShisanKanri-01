@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { totalAssets, validateAssetAccount, type AssetAccount } from "./assets";
+import { totalAssets, validateAssetAccount, type AssetAccount } from "./assets.ts";
 test("validates account names and nonnegative finite amounts", () => {
  assert.equal(validateAssetAccount({ name: " ", institution: "", amount: 1 }), "口座名を入力してください。");
  assert.equal(validateAssetAccount({ name: "普通預金", institution: "", amount: -1 }), "金額は0以上の数値で入力してください。");
