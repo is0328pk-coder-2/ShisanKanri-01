@@ -16,10 +16,10 @@ class StorageTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             folder = Path(directory)
             db_path = initialize_database(folder)
-            with sqlite3.connect(db_path) as connection:
+            with closing(sqlite3.connect(db_path)) as connection, connection:
                 connection.execute("INSERT INTO goals(name, target_amount) VALUES (?, ?)", ("test", 12345))
             initialize_database(folder)
-            with sqlite3.connect(db_path) as connection:
+            with closing(sqlite3.connect(db_path)) as connection, connection:
                 row = connection.execute("SELECT name, target_amount FROM goals").fetchone()
             self.assertEqual(row, ("test", 12345))
     def test_settings_are_persisted_separately(self) -> None:
