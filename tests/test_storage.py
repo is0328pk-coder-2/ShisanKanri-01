@@ -1,5 +1,6 @@
 from __future__ import annotations
 import sqlite3
+from contextlib import closing
 import tempfile
 import unittest
 from pathlib import Path
@@ -8,7 +9,7 @@ class StorageTests(unittest.TestCase):
     def test_database_is_created_with_expected_tables(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             db_path = initialize_database(Path(directory) / "nested" / "data")
-            with sqlite3.connect(db_path) as connection:
+            with closing(sqlite3.connect(db_path)) as connection, connection:
                 tables = {row[0] for row in connection.execute("SELECT name FROM sqlite_master WHERE type='table'")}
             self.assertTrue({"assets", "asset_snapshots", "dividends", "goals", "app_settings"}.issubset(tables))
     def test_existing_data_survives_reinitialization(self) -> None:
