@@ -20,7 +20,14 @@ GUIにはTkinterが必要です。Windows標準Pythonの通常インストール
 
 ## テスト
 
-    python -m unittest discover -v
+Windowsでは仮想環境を自動作成してテストを実行できます。
+
+    scripts\\run-tests.cmd
+
+手動で実行する場合:
+
+    python -m venv .venv
+    .venv\\Scripts\\python.exe -m unittest discover -v
 
 ## データ保存場所
 
