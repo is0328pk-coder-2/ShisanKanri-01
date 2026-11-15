@@ -8,7 +8,7 @@
 
 ## 開発環境
 
-- Node.js 22.12以降
+- Node.js 24.12以降
 - npm
 - Firebaseプロジェクト（Authenticationのメール/パスワード認証を有効化）
 
