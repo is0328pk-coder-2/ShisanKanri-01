@@ -1,5 +1,6 @@
 from __future__ import annotations
 import json
+from contextlib import closing
 import os
 import sqlite3
 from pathlib import Path
@@ -42,7 +43,7 @@ def initialize_database(folder: Path) -> Path:
     try:
         folder.mkdir(parents=True, exist_ok=True)
         db_path = database_path_for(folder)
-        with sqlite3.connect(db_path) as connection:
+        with closing(sqlite3.connect(db_path)) as connection, connection:
             connection.execute("PRAGMA foreign_keys = ON")
             connection.executescript("""
             CREATE TABLE IF NOT EXISTS assets (
